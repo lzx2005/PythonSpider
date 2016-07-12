@@ -14,7 +14,20 @@ class SpiderMain(object):
         self.outputer = html_outputer.HtmlOutputer()
 
     def craw(self, root_url):
-        pass
+        # 添加根目录
+        self.urls.add_new_url(root_url)
+        # 当有新的Url时候进入循环
+        while self.urls.has_new_url():
+            # 获得新的Url
+            new_url = self.urls.get_new_url()
+            # 下载HTML页面
+            html_cont = self.downloader.download(new_url)
+            # 解析HTML
+            new_urls, new_data = self.parser.parse(new_url,html_cont)
+            # 把页面中的Url添加进Url库中
+            self.urls.add_new_urls(new_urls)
+            # 获取页面中的数据，并展示
+            self.outputer.collect_data(new_data)
 
 
 if __name__ == "__main__":
