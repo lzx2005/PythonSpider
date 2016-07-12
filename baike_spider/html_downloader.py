@@ -1,2 +1,3 @@
 class HtmlDownloader(object):
-    pass
+    def download(self, new_url):
+        pass

@@ -1,2 +1,3 @@
 class HtmlParser(object):
-    pass
+    def parse(self, new_url, html_cont):
+        pass
